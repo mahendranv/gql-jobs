@@ -1,0 +1,36 @@
+type Query {
+
+    ## Profile
+
+}
+
+type Mutation {
+
+    ## Auth
+    registerUser(auth: AuthInput): Auth
+
+}
+
+
+### Models
+type Auth {
+
+    id: ID
+
+    email: String!
+
+    password: String!
+
+}
+
+
+
+### Input
+
+input AuthInput {
+
+    email: String!
+
+    password: String!
+
+}

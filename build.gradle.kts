@@ -6,6 +6,8 @@ plugins {
 	kotlin("jvm") version "1.5.10"
 	kotlin("plugin.spring") version "1.5.10"
 	kotlin("plugin.jpa") version "1.5.10"
+
+	id("com.netflix.dgs.codegen") version "4.6.4"
 }
 
 group = "com.ex2"
@@ -16,6 +18,12 @@ repositories {
 	mavenCentral()
 }
 
+
+tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
+	packageName = "com.ex2.jobs.gen"
+	schemaPaths = mutableListOf("${projectDir}/src/main/resources/schema")
+}
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -24,6 +32,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter:3.12.1")
 }
 
 tasks.withType<KotlinCompile> {
