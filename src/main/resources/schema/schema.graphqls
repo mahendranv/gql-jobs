@@ -2,6 +2,11 @@ type Query {
 
     ## Profile
 
+    # TODO: Delete after dry run
+    resourceApplicant: String
+    resourceAdmin: String
+    resourceEmployer: String
+
 }
 
 type Mutation {
