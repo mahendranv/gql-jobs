@@ -12,6 +12,9 @@ class SessionService {
     @Autowired
     private lateinit var sessionRepo: SessionRepository
 
+    @Autowired
+    private lateinit var roleService: RoleService
+
     fun authorizeToken(token: String): Long? {
         val result = sessionRepo.findById(token)
         return result.orElse(null)?.memberId
@@ -21,13 +24,7 @@ class SessionService {
 
         val result = if (token.isNullOrEmpty()) null else sessionRepo.findById(token)
         val memberId = result?.orElse(null)?.memberId
-
-        // TODO: Actual role implementation
-        val role = when (memberId) {
-            80L -> UserRoles.ROLE_ADMIN
-            null -> UserRoles.ROLE_VISITOR
-            else -> UserRoles.ROLE_APPLICANT
-        }
+        val role = if (memberId == null) UserRoles.ROLE_VISITOR else roleService.getRole(memberId)
 
         return PoriSession(
             token = token,

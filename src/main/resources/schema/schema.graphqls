@@ -17,6 +17,10 @@ type Mutation {
     ## Auth
     registerUser(auth: AuthInput): Auth
     setUserRole(roleInput: RoleInput): Boolean
+
+
+    ## Employer
+    createJob(job: JobInput): Job
 }
 
 

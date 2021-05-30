@@ -18,15 +18,21 @@ class AuthorizationAspect {
     @Before("@annotation(AdminOnly)")
     fun authenticateRequest(joinPoint: JoinPoint) {
         val session = requestUtils.getSessionData()
-        if (session?.role == UserRoles.ROLE_ADMIN) {
-//            val result = joinPoint.proceed()
-//            return result
-        } else {
+        if (session?.role != UserRoles.ROLE_ADMIN) {
+
             // TODO: Error
             throw GraphQLException("This resource is admin only")
-//            val result = joinPoint.proceed()
-//            return result
         }
     }
+
+    @Before("@annotation(EmployerOnly)")
+    fun authenticateEmployerOnlyRequest(joinPoint: JoinPoint) {
+        val session = requestUtils.getSessionData()
+        if (session?.role != UserRoles.ROLE_EMPLOYER) {
+            // TODO: Error
+            throw GraphQLException("This resource is for employer only")
+        }
+    }
+
 
 }

@@ -26,4 +26,9 @@ class RoleService {
         }
     }
 
+    fun getRole(memberId: Long): UserRoles {
+        val entity = roleRepository.findById(memberId).orElseThrow { Exception("Member not found") }
+        return entity.role
+    }
+
 }

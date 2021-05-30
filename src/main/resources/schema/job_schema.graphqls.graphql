@@ -1,0 +1,53 @@
+# Models
+
+type Job {
+
+    id: ID!
+
+    title: String!
+
+    summary: String!
+
+    isRemote: Boolean!
+
+    location: String!
+
+    minExperience: Int!
+
+    postedBy: Int!
+
+    designation: String!
+
+    jobStatus: JobStatus!
+
+}
+
+enum JobStatus {
+    CREATED,
+    OPEN,
+    CLOSE
+}
+
+
+# Inputs
+
+input JobInput {
+
+    id: Int
+
+    title: String!
+
+    summary: String!
+
+    isRemote: Boolean!
+
+    location: String!
+
+    minExperience: Int!
+
+    postedBy: Int!
+
+    designation: String!
+
+    jobStatus: JobStatus!
+}
