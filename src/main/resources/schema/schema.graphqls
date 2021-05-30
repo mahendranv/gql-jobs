@@ -16,7 +16,7 @@ type Mutation {
 
     ## Auth
     registerUser(auth: AuthInput): Auth
-
+    setUserRole(roleInput: RoleInput): Boolean
 }
 
 
@@ -49,4 +49,22 @@ input AuthInput {
 
     password: String!
 
+}
+
+input RoleInput {
+
+    memberId: Int!
+
+    role: UserRoles!
+}
+
+enum UserRoles {
+
+    ROLE_ADMIN,
+
+    ROLE_APPLICANT,
+
+    ROLE_EMPLOYER,
+
+    ROLE_VISITOR
 }
