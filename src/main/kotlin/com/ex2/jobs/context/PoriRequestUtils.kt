@@ -20,16 +20,10 @@ class PoriRequestUtils {
         val authToken = request.getHeader(HeaderConstants.X_AUTHORIZATION)
         // TODO: Update user & device info
 
-        val session =
-            if (authToken == null) null
-            else sessionService.validateToken(authToken)
-        request.setAttribute(
-            PORI_SESSION, PoriSession(
-                token = authToken,
-                memberId = session?.memberId
-            )
-        )
-        println("PoriRequestUtils.saveSessionData : $request")
+        val session = sessionService.validateToken(authToken)
+        request.setAttribute(PORI_SESSION, session)
+
+        println("PoriRequestUtils.saveSessionData $session")
     }
 
     fun getSessionData(): PoriSession? {
