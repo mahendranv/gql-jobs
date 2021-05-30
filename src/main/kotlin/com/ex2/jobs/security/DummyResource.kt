@@ -13,10 +13,14 @@ class DummyResource {
     @DgsQuery
     fun resourceApplicant() = UUID.randomUUID().toString()
 
+    @AdminOnly
     @DgsQuery
     fun resourceAdmin() = UUID.randomUUID().toString()
 
     @DgsQuery
     fun resourceEmployer() = UUID.randomUUID().toString()
+
+    @DgsQuery
+    fun resourceVisitor() = "vis: " + UUID.randomUUID().toString()
 
 }

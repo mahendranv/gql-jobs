@@ -6,6 +6,9 @@ type Query {
     resourceApplicant: String
     resourceAdmin: String
     resourceEmployer: String
+    resourceVisitor: String
+
+    login(auth: AuthInput): Session
 
 }
 
@@ -25,6 +28,14 @@ type Auth {
     email: String!
 
     password: String!
+
+}
+
+type Session {
+
+    token: String!
+
+    memberId: String!
 
 }
 
