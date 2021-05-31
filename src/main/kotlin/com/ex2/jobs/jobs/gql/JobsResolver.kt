@@ -11,9 +11,7 @@ import com.ex2.jobs.security.EmployerOnly
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsData
 import com.netflix.graphql.dgs.InputArgument
-import graphql.schema.DataFetchingEnvironment
 import org.springframework.beans.factory.annotation.Autowired
-import java.lang.Exception
 
 @DgsComponent
 class JobsResolver {
@@ -27,21 +25,16 @@ class JobsResolver {
     @EmployerOnly
     @DgsData(
         parentType = DgsConstants.Mutation_TYPE,
-        field = DgsConstants.MUTATION.CreateJob
+        field = DgsConstants.MUTATION.SaveJob
     )
-    fun createJob(
+    fun saveJob(
         @InputArgument("job") input: JobInput
     ): Job {
-        val memberId = requestUtils.getSessionData()?.memberId
-            ?: throw Exception("Cannot find a employer session")
-
-        // TODO: DFE get user id
-        return jobService.saveJob(
-            input.toEntity(
-                postedBy = memberId,
-                id = null
-            )
-        ).toGraph()
+        val memberId = requestUtils.employerIdOrThrow()
+        val entity = input.toEntity(
+            postedBy = memberId
+        )
+        return jobService.saveJob(entity).toGraph()
     }
 
 }

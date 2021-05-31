@@ -1,6 +1,7 @@
 package com.ex2.jobs.context
 
 import com.ex2.jobs.auth.SessionService
+import com.ex2.jobs.security.UserRoles
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.context.request.RequestAttributes
@@ -30,6 +31,23 @@ class PoriRequestUtils {
         val session = RequestContextHolder
             .getRequestAttributes()?.getAttribute(PORI_SESSION, RequestAttributes.SCOPE_REQUEST)
         return session as? PoriSession?
+    }
+
+    fun employerIdOrThrow(): Long {
+        val data = getSessionData()
+        if (data?.role == UserRoles.ROLE_EMPLOYER && data.memberId != null) {
+            return data.memberId!!
+        }
+        throw Exception("Employer session not found")
+    }
+
+
+    fun applicantIdOrThrow(): Long {
+        val data = getSessionData()
+        if (data?.role == UserRoles.ROLE_APPLICANT && data.memberId != null) {
+            return data.memberId!!
+        }
+        throw Exception("Applicant session not found")
     }
 
     companion object {

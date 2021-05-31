@@ -8,7 +8,6 @@ import com.ex2.jobs.jobs.entity.JobEntity
 object JobTypeAdapter {
 
     fun JobInput.toEntity(
-        id: Int? = null,
         postedBy: Long
     ) = JobEntity(
         title = title,

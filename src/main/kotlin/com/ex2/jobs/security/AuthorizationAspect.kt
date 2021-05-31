@@ -1,6 +1,7 @@
 package com.ex2.jobs.security
 
 import com.ex2.jobs.context.PoriRequestUtils
+import com.ex2.jobs.error.ExceptionFactory
 import graphql.GraphQLException
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.annotation.Aspect
@@ -19,9 +20,7 @@ class AuthorizationAspect {
     fun authenticateRequest(joinPoint: JoinPoint) {
         val session = requestUtils.getSessionData()
         if (session?.role != UserRoles.ROLE_ADMIN) {
-
-            // TODO: Error
-            throw GraphQLException("This resource is admin only")
+            throw ExceptionFactory.plain("This resource is admin only")
         }
     }
 
@@ -29,10 +28,7 @@ class AuthorizationAspect {
     fun authenticateEmployerOnlyRequest(joinPoint: JoinPoint) {
         val session = requestUtils.getSessionData()
         if (session?.role != UserRoles.ROLE_EMPLOYER) {
-            // TODO: Error
-            throw GraphQLException("This resource is for employer only")
+            throw ExceptionFactory.plain("This resource is for employer only")
         }
     }
-
-
 }

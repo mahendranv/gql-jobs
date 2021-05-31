@@ -20,7 +20,7 @@ type Mutation {
 
 
     ## Employer
-    createJob(job: JobInput): Job
+    saveJob(job: JobInput): Job
 }
 
 
