@@ -20,6 +20,8 @@ type Job {
 
     jobStatus: JobStatus!
 
+    created: timestamp
+
 }
 
 enum JobStatus {
@@ -44,8 +46,6 @@ input JobInput {
     location: String!
 
     minExperience: Int!
-
-    postedBy: Int!
 
     designation: String!
 

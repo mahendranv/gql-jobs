@@ -50,4 +50,9 @@ class JobService {
     fun closeJob(jobId: Long) {
         jobRepo.updateJobStatus(jobId, JobStatus.CLOSE)
     }
+
+    // TODO: Filters
+    fun getJobs() : List<JobEntity> {
+        return jobRepo.findAll()
+    }
 }

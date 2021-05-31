@@ -37,4 +37,11 @@ class JobsResolver {
         return jobService.saveJob(entity).toGraph()
     }
 
+
+    @DgsData(parentType = DgsConstants.QUERY_TYPE, field = DgsConstants.QUERY.GetJobs)
+    fun getJobs() : List<Job> {
+        return jobService.getJobs().map {
+            it.toGraph()
+        }
+    }
 }

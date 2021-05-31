@@ -22,6 +22,9 @@ repositories {
 tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
 	packageName = "com.ex2.jobs.gen"
 	schemaPaths = mutableListOf("${projectDir}/src/main/resources/schema")
+	typeMapping = mutableMapOf (
+		"timestamp" to "java.time.OffsetDateTime"
+	)
 }
 
 dependencies {
@@ -37,7 +40,9 @@ dependencies {
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-	implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter:3.12.1")
+	implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:3.12.1"))
+	implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
+	implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
 }
 
 tasks.withType<KotlinCompile> {

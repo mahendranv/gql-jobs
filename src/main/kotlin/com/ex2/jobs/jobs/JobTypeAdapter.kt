@@ -32,7 +32,8 @@ object JobTypeAdapter {
             isRemote = isRemote,
             minExperience = minExperience,
             location = location,
-            designation = designation
+            designation = designation,
+            created = created
         )
 
     fun JobStatus.toEntity() = com.ex2.jobs.jobs.entity.JobStatus.valueOf(name)
