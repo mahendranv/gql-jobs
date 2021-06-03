@@ -18,6 +18,10 @@ type Query {
     viewApplication(id: ID!): JobApplication!
     viewMyapplications: [JobApplication!]
 
+
+    # Address
+    getAddress: Address
+
 }
 
 type Mutation {
@@ -32,6 +36,9 @@ type Mutation {
 
     # job - application
     applyForJob(data: JobApplicationInput): JobApplication
+
+    # Address
+    saveAddress(address: AddressInput): Address
 }
 
 

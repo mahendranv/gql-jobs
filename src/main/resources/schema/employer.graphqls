@@ -1,0 +1,38 @@
+# Company
+
+type CompanyProfile {
+
+    id: ID!
+
+    title: String!
+
+    tagLine: String!
+
+    imageUrl: String!
+
+    """
+    Number of employees. This will be approximated when showing to
+    applicants
+    """
+    size: Int!
+
+    website: String!
+
+    contact: ContactInfo!
+
+    address: Address!
+
+}
+
+input CompanyProfileInput {
+
+    title: String!
+
+    tagLine: String!
+
+    imageUrl: String!
+
+    size: Int!
+
+    website: String!
+}

@@ -1,6 +1,7 @@
 package com.ex2.jobs.context
 
 import com.ex2.jobs.auth.SessionService
+import com.ex2.jobs.error.ExceptionFactory
 import com.ex2.jobs.security.UserRoles
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -31,6 +32,11 @@ class PoriRequestUtils {
         val session = RequestContextHolder
             .getRequestAttributes()?.getAttribute(PORI_SESSION, RequestAttributes.SCOPE_REQUEST)
         return session as? PoriSession?
+    }
+
+    fun memberIdOrThrow(): Long {
+        val data = getSessionData()
+        return data?.memberId ?: throw ExceptionFactory.plain("Please login")
     }
 
     fun employerIdOrThrow(): Long {

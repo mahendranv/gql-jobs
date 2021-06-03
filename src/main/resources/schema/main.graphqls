@@ -1,1 +1,108 @@
 scalar timestamp
+
+#scalar mobile
+
+"""For companies chances of multiple branches will be there"""
+enum AddressType {
+
+    MAIN
+
+    BRANCH
+
+}
+
+
+type Social {
+
+    id: ID!
+
+    """
+    Twitter handle alone
+    """
+    twitter: String
+
+    """
+    LinkedIn profile handle
+    """
+    linkedIn: String
+
+    """
+    facebook handle
+    """
+    facebook: String
+
+}
+
+input SocialInput {
+
+    twitter: String
+
+    linkedIn: String
+
+    facebook: String
+}
+
+type Address {
+
+    id: ID!
+
+#    addressType: AddressType!
+
+    landmark: String
+
+    addressLine1: String!
+
+    addressLine2: String!
+
+    city: String!
+
+    zipCode: String!
+
+    state: String!
+
+    country: String!
+
+    """Optional phone number per/branch??"""
+    phone: String
+}
+
+input AddressInput {
+
+    landmark: String
+
+    addressLine1: String!
+
+    addressLine2: String!
+
+    city: String!
+
+    zipCode: String!
+
+    state: String!
+
+    country: String!
+
+    phone: String
+
+}
+
+type ContactInfo {
+
+    phone: String!
+
+    altPhone: [String!]
+
+    email: String!
+
+}
+
+
+input ContactInfoInput {
+
+    phone: String!
+
+    altPhone: [String!]
+
+    email: String!
+
+}
