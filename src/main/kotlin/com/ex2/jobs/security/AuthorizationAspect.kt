@@ -31,4 +31,12 @@ class AuthorizationAspect {
             throw ExceptionFactory.plain("This resource is for employer only")
         }
     }
+
+    @Before("@annotation(ApplicantOnly)")
+    fun authenticateApplicantOnlyRequest(joinPoint: JoinPoint) {
+        val session = requestUtils.getSessionData()
+        if (session?.role != UserRoles.ROLE_APPLICANT) {
+            throw ExceptionFactory.plain("This resource is for employer only")
+        }
+    }
 }

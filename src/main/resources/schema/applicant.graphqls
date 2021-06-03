@@ -1,0 +1,26 @@
+# Applicant related input/types
+
+type JobApplication {
+
+    id: ID!
+
+    applicantId: ID!
+
+    jobId: ID!
+
+    created: timestamp!
+
+    message: String
+
+}
+
+
+input JobApplicationInput {
+
+    applicantId: ID!
+
+    jobId: ID!
+
+    message: String
+
+}

@@ -6,6 +6,7 @@ import com.ex2.jobs.jobs.entity.JobRepository
 import com.ex2.jobs.jobs.entity.JobStatus
 import graphql.GraphQLException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Example
 import org.springframework.stereotype.Service
 
 @Service
@@ -52,7 +53,15 @@ class JobService {
     }
 
     // TODO: Filters
-    fun getJobs() : List<JobEntity> {
+    fun getJobs(): List<JobEntity> {
         return jobRepo.findAll()
+    }
+
+    fun getJob(id: String): JobEntity {
+        return jobRepo.getById(id.toLong())
+    }
+
+    fun exists(probe: JobEntity): Boolean {
+        return jobRepo.exists(Example.of(probe))
     }
 }

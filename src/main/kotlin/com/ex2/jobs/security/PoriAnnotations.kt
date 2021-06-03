@@ -9,6 +9,10 @@ annotation class AdminOnly
 @Retention(AnnotationRetention.RUNTIME)
 annotation class EmployerOnly
 
+@Target(AnnotationTarget.FUNCTION)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class ApplicantOnly
+
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)

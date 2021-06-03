@@ -3,8 +3,8 @@ package com.ex2.jobs.auth
 import com.ex2.jobs.auth.entities.RoleEntity
 import com.ex2.jobs.auth.repo.AuthRepository
 import com.ex2.jobs.auth.repo.RoleRepository
+import com.ex2.jobs.error.ExceptionFactory
 import com.ex2.jobs.security.UserRoles
-import graphql.GraphQLException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -22,7 +22,7 @@ class RoleService {
         if (member.isPresent) {
             roleRepository.save(RoleEntity(memberId, role))
         } else {
-            throw GraphQLException("Member - not present in our system")
+            throw ExceptionFactory.plain("Member - not present in our system")
         }
     }
 
