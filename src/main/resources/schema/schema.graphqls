@@ -23,6 +23,8 @@ type Query {
     getAddress: Address
     getContactInfo: ContactInfo
 
+    # Applicant
+    viewApplicantProfile(id: ID!): ApplicantProfile!
 }
 
 type Mutation {

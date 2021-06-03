@@ -7,9 +7,12 @@ import com.ex2.jobs.error.ExceptionFactory
 import com.ex2.jobs.gen.DgsConstants
 import com.ex2.jobs.gen.types.Address
 import com.ex2.jobs.gen.types.AddressInput
+import com.ex2.jobs.gen.types.ApplicantProfile
 import com.netflix.graphql.dgs.DgsComponent
+import com.netflix.graphql.dgs.DgsData
 import com.netflix.graphql.dgs.DgsMutation
 import com.netflix.graphql.dgs.DgsQuery
+import graphql.schema.DataFetchingEnvironment
 import org.springframework.beans.factory.annotation.Autowired
 
 @DgsComponent
@@ -33,6 +36,17 @@ class AddressResolver {
             .saveAddress(
                 address.toEntity(requestUtils.memberIdOrThrow().toString())
             ).toGraph()
+
+
+    // Nesting
+    @DgsData(
+        parentType = DgsConstants.APPLICANTPROFILE.TYPE_NAME,
+        field = DgsConstants.APPLICANTPROFILE.Address
+    )
+    fun getAddress(dfe: DataFetchingEnvironment): Address? {
+        val profile = dfe.getSource<ApplicantProfile>()
+        return service.getAddress(profile.id)?.toGraph()
+    }
 }
 
 private fun AddressEntity.toGraph(): Address = Address(

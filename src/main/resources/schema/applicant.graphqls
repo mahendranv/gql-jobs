@@ -22,3 +22,24 @@ input JobApplicationInput {
     message: String
 
 }
+
+type GeneralInfo {
+
+    displayName: String!
+
+    imageUrl: String!
+
+    summary: String!
+}
+
+type ApplicantProfile {
+
+    id: ID!
+
+    general: GeneralInfo
+
+    address: Address
+
+    contact: ContactInfo
+
+}
