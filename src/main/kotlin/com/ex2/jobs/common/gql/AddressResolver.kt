@@ -22,10 +22,9 @@ class AddressResolver {
     lateinit var requestUtils: PoriRequestUtils
 
     @DgsQuery(field = DgsConstants.QUERY.GetAddress)
-    fun getAddress(): Address {
+    fun getAddress(): Address? {
         val address = service.getAddress(id = requestUtils.memberIdOrThrow().toString())
-            ?: throw ExceptionFactory.plain("Address not found")
-        return address.toGraph()
+        return address?.toGraph()
     }
 
     @DgsMutation(field = DgsConstants.MUTATION.SaveAddress)
