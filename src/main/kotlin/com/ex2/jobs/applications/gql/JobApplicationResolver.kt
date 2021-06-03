@@ -37,6 +37,9 @@ class JobApplicationResolver {
     fun applyForJob(@InputArgument("data") data: JobApplicationInput): JobApplication {
         val entity = data.toEntity(applicantId = requestUtils.applicantIdOrThrow().toString())
 
+        if (jobService.getJob(data.jobId) == null) {
+            throw ExceptionFactory.plain("Invalid job")
+        }
         // TODO: Loaders for profile expansion
         return jobApplicationService.applyForJob(entity).toGraph()
     }
@@ -63,7 +66,7 @@ class JobApplicationResolver {
         val result = jobApplicationService.viewApplication(probe).toGraph()
         if (session.role == UserRoles.ROLE_EMPLOYER) {
             val job = jobService.getJob(result.jobId)
-            if (job.postedBy != session.memberId!!) {
+            if (job?.postedBy != session.memberId!!) {
                 throw ExceptionFactory.plain("This job is not posted from current employer account")
             }
         } else {

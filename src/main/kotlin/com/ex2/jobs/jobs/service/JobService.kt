@@ -57,8 +57,12 @@ class JobService {
         return jobRepo.findAll()
     }
 
-    fun getJob(id: String): JobEntity {
-        return jobRepo.getById(id.toLong())
+    fun getJob(id: String): JobEntity? {
+        return try {
+            jobRepo.getById(id.toLong())
+        } catch (e: Exception) {
+            null
+        }
     }
 
     fun exists(probe: JobEntity): Boolean {
