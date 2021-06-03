@@ -17,8 +17,6 @@ type JobApplication {
 
 input JobApplicationInput {
 
-    applicantId: ID!
-
     jobId: ID!
 
     message: String

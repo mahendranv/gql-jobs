@@ -53,18 +53,14 @@ class JobApplicationResolver {
         val session =
             requestUtils.getSessionData() ?: throw ExceptionFactory.plain("You must login to view the application")
 
-        val probe = JobApplicationEntity(
-            id = id,
-            jobId = null,
-            applicantId = null
-        )
-
         // Applicant
+        val result = jobApplicationService.getById(id).toGraph()
         if (session.role == UserRoles.ROLE_APPLICANT) {
-            probe.applicantId = session.memberId!!.toString()
-        }
-        val result = jobApplicationService.viewApplication(probe).toGraph()
-        if (session.role == UserRoles.ROLE_EMPLOYER) {
+            if (result.applicantId != session.memberId!!.toString()) {
+                // How did he get here!!
+                throw ExceptionFactory.plain("Job application cannot be viewed")
+            }
+        } else if (session.role == UserRoles.ROLE_EMPLOYER) {
             val job = jobService.getJob(result.jobId)
             if (job?.postedBy != session.memberId!!) {
                 throw ExceptionFactory.plain("This job is not posted from current employer account")

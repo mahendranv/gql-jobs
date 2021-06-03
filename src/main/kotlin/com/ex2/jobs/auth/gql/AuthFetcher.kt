@@ -7,6 +7,7 @@ import com.ex2.jobs.auth.RoleService
 import com.ex2.jobs.auth.entities.SessionEntity
 import com.ex2.jobs.auth.repo.AuthRepository
 import com.ex2.jobs.auth.repo.SessionRepository
+import com.ex2.jobs.error.ExceptionFactory
 import com.ex2.jobs.gen.DgsConstants
 import com.ex2.jobs.gen.types.Auth
 import com.ex2.jobs.gen.types.AuthInput
@@ -78,7 +79,7 @@ class AuthFetcher {
             )
             return SessionEntityMapper.toGraph(session)
         } else {
-            throw RuntimeException("User account does not exist")
+            throw ExceptionFactory.plain("User account does not exist")
         }
     }
 }

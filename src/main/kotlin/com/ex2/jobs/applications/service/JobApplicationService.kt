@@ -34,6 +34,14 @@ class JobApplicationService {
         return repo.save(application)
     }
 
+    fun getById(id: String): JobApplicationEntity {
+        return try {
+            repo.getById(id)
+        } catch (e: Exception) {
+            throw  ExceptionFactory.plain("Cannot find the job application")
+        }
+    }
+
     fun viewApplication(probe: JobApplicationEntity): JobApplicationEntity {
         return repo.findOne(Example.of(probe))
             .orElseThrow { ExceptionFactory.plain("Cannot find the job application") }
