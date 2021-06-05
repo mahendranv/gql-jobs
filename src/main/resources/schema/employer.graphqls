@@ -18,11 +18,11 @@ type CompanyProfile {
 
     website: String!
 
-    contact: ContactInfo!
+    contact: ContactInfo
 
-    address: Address!
-
+    address: Address
 }
+
 
 input CompanyProfileInput {
 
@@ -32,6 +32,10 @@ input CompanyProfileInput {
 
     imageUrl: String!
 
+    """
+    Number of employees. This will be approximated when showing to
+    applicants
+    """
     size: Int!
 
     website: String!

@@ -1,15 +1,14 @@
 package com.ex2.jobs.company.model
 
 import javax.persistence.Column
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
+import javax.persistence.Entity
 import javax.persistence.Id
 
+@Entity(name = "company_profile")
 data class CompanyProfileEntity(
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: String? = null,
 
     @Column(name = "title")
@@ -26,5 +25,4 @@ data class CompanyProfileEntity(
 
     @Column(name = "website")
     val website: String
-
 )

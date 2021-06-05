@@ -8,6 +8,7 @@ import com.ex2.jobs.gen.DgsConstants
 import com.ex2.jobs.gen.types.Address
 import com.ex2.jobs.gen.types.AddressInput
 import com.ex2.jobs.gen.types.ApplicantProfile
+import com.ex2.jobs.gen.types.CompanyProfile
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsData
 import com.netflix.graphql.dgs.DgsMutation
@@ -45,6 +46,15 @@ class AddressResolver {
     )
     fun getAddress(dfe: DataFetchingEnvironment): Address? {
         val profile = dfe.getSource<ApplicantProfile>()
+        return service.getAddress(profile.id)?.toGraph()
+    }
+
+    @DgsData(
+        parentType = DgsConstants.COMPANYPROFILE.TYPE_NAME,
+        field = DgsConstants.APPLICANTPROFILE.Address
+    )
+    fun getCompanyAddress(dfe: DataFetchingEnvironment): Address? {
+        val profile = dfe.getSource<CompanyProfile>()
         return service.getAddress(profile.id)?.toGraph()
     }
 }
