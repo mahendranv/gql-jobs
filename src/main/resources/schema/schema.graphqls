@@ -20,6 +20,8 @@ type Query {
     viewApplication(id: ID!): JobApplication!
     viewMyapplications: [JobApplication!]
 
+    # Skills
+    suggestSkills(skill: String!): [Skill!]
 
     # Address
     getAddress: Address
@@ -45,6 +47,10 @@ type Mutation {
     # Address
     saveAddress(address: AddressInput): Address
     saveContactInfo(contactInfo: ContactInfoInput): ContactInfo
+
+    # Skills
+    saveSkills(skill: [String!]): [Skill!]
+    saveSkill(data: SkillInput): Skill
 }
 
 

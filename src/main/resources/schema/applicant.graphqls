@@ -42,4 +42,6 @@ type ApplicantProfile {
 
     contact: ContactInfo
 
+    skills: [Skill!]
+
 }

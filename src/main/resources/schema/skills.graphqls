@@ -1,0 +1,18 @@
+"""Auxilary meta table which collect slugs for search and index job and applicants"""
+type Skill {
+
+    id: ID!
+
+    key: String!
+
+    description: String
+}
+
+input SkillInput {
+
+    id: ID
+
+    key: String!
+
+    description: String
+}
