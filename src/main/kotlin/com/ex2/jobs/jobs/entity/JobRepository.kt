@@ -17,5 +17,4 @@ interface JobRepository : JpaRepository<JobEntity, Long> {
         @Param("id") id: Long,
         @Param("status") status: JobStatus
     )
-
 }

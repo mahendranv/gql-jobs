@@ -1,5 +1,6 @@
 package com.ex2.jobs.jobs.entity
 
+import com.ex2.jobs.skills.model.SkillEntity
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import javax.persistence.*
@@ -39,7 +40,10 @@ data class JobEntity(
     val designation: String,
 
     @Column(name = "job_status")
-    val jobStatus: JobStatus
+    val jobStatus: JobStatus,
+
+    @ManyToMany(mappedBy = "jobs")
+    var tags: List<SkillEntity>? = null
 
 ) {
 

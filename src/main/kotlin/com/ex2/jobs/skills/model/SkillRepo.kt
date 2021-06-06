@@ -18,4 +18,11 @@ interface SkillRepo : JpaRepository<SkillEntity, String> {
     @Query("select * from skills s WHERE s.key in (:keys) ORDER BY name;", nativeQuery = true)
     fun listSkillsOfKeys(@Param("keys") keys: Set<String>): List<SkillEntity>
 
+
+    @Query(
+        "select * from skills s RIGHT JOIN job_skill_map jsm on jsm.skill_id=s.id where jsm.job_id=(:jobId);",
+        nativeQuery = true
+    )
+    fun listSkillsOfJob(@Param("jobId") jobId: String): List<SkillEntity>
+
 }

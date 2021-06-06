@@ -1,9 +1,6 @@
 package com.ex2.jobs.skills.service
 
-import com.ex2.jobs.skills.model.SkillEntity
-import com.ex2.jobs.skills.model.SkillRepo
-import com.ex2.jobs.skills.model.UserSkillMap
-import com.ex2.jobs.skills.model.UserSkillRepo
+import com.ex2.jobs.skills.model.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -15,6 +12,9 @@ class SkillService {
 
     @Autowired
     private lateinit var userSkillRepo: UserSkillRepo
+
+    @Autowired
+    private lateinit var jobSkillRepo: JobSkillRepo
 
     fun saveSkill(entity: SkillEntity): SkillEntity {
         return skillRepo.save(entity)
@@ -36,13 +36,22 @@ class SkillService {
         return result
     }
 
-    fun saveSkills(memberId: String, skills: Set<SkillEntity>): List<SkillEntity> {
-        val skills = createSkillsIfMissing(skills)
-
-        // Get member skill list
+    fun saveSkills(memberId: String, skillInput: Set<SkillEntity>): List<SkillEntity> {
+        val skills = createSkillsIfMissing(skillInput)
         val mapping = skills.map { UserSkillMap(userId = memberId, skillId = it.id!!) }
         userSkillRepo.saveAll(mapping)
-
         return skills
     }
+
+    fun saveSkillsForJob(jobId: String, skillInput: Set<SkillEntity>): List<SkillEntity> {
+        val skills = createSkillsIfMissing(skillInput)
+        val mapping = skills.map { JobSkillMap(jobId = jobId, skillId = it.id!!) }
+        jobSkillRepo.saveAll(mapping)
+        return skills
+    }
+
+    fun getSkillsOfJob(jobId: String): List<SkillEntity> {
+        return skillRepo.listSkillsOfJob(jobId)
+    }
+
 }
