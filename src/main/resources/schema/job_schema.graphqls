@@ -22,6 +22,8 @@ type Job {
 
     created: timestamp
 
+    skills: [Skill!]
+
 }
 
 enum JobStatus {
