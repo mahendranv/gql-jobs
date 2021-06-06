@@ -3,7 +3,7 @@ type Skill {
 
     id: ID!
 
-    key: String!
+    name: String!
 
     description: String
 }
@@ -12,7 +12,22 @@ input SkillInput {
 
     id: ID
 
-    key: String!
+    name: String!
 
     description: String
+}
+
+input UserSkillsInput {
+
+    userId: ID!
+
+    skills: [SkillInput!]!
+}
+
+
+input JobSkillsInput {
+
+    jobId: ID!
+
+    skills: [SkillInput!]!
 }

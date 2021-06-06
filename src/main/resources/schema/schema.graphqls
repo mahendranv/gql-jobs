@@ -51,6 +51,9 @@ type Mutation {
     # Skills
     saveSkills(skill: [String!]): [Skill!]
     saveSkill(data: SkillInput): Skill
+
+    mapSkillToJob(data: JobSkillsInput!): [Skill!]
+    mapSkillToUser(data: UserSkillsInput!): [Skill!]
 }
 
 
